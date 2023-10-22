@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.trabapi.entities.Proprietario;
+import br.com.api.trabapi.services.ProprietarioService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController

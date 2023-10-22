@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.api.g4.entities.Categoria;
-import br.com.api.g4.services.CategoriaService;
+import br.com.api.trabapi.entities.Apartamento;
+import br.com.api.trabapi.services.ApartamentoService;
 
 @RestController
 @RequestMapping("/apartamento")
