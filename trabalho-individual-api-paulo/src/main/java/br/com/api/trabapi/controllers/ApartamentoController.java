@@ -20,7 +20,7 @@ import br.com.api.trabapi.services.ApartamentoService;
 public class ApartamentoController {
 
 	@Autowired
-	ApartamentoService categoriaService;
+	ApartamentoService apartamentoService;
 
 	@GetMapping("/count")
 	public Integer getCount() {

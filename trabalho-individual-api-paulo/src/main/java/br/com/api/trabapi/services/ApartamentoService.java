@@ -16,11 +16,11 @@ public class ApartamentoService {
 		return apartamentoRepository.contar();
 	}
 	
-	public Categoria salvar(Apartamento objetoTeste) {
+	public Apartamento salvar(Apartamento objetoTeste) {
 		return apartamentoRepository.save(objetoTeste);
 	}
 
-	public Categoria acharId(Integer id) {
+	public Apartamento acharId(Integer id) {
 		return apartamentoRepository.findById(id).get();
 	}
 
