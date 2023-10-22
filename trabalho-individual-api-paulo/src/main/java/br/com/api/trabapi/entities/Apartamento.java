@@ -1,5 +1,6 @@
 package br.com.api.trabapi.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "apartamento")
@@ -14,14 +16,31 @@ public class Apartamento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false, unique = true)
 	private Integer id;
-	private Integer numero;
+	@Column(length = 9)
+    @NotBlank
+	private String numero;
+	@Column(length = 12)
+    @NotBlank
 	private String cor;
+	@Column()
+	@NotBlank
 	private Double juros;
+	@Column()
+	@NotBlank
 	private Inquilino inquilino;
+	@Column()
+	@NotBlank
 	private Proprietario proprietario;
+	@Column()
+	@NotBlank
 	private Double valor;
+	@Column()
+	@NotBlank
 	private Boolean mobilidado;
+	@Column()
+	@NotBlank
 	private Boolean ativo;
 	
 	@OneToOne
@@ -33,7 +52,7 @@ public class Apartamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Apartamento(Integer id, Integer numero, String cor, Double juros, Inquilino inquilino,
+	public Apartamento(Integer id, String numero, String cor, Double juros, Inquilino inquilino,
 			Proprietario proprietario, Double valor, Boolean mobilidado, Boolean ativo) {
 		super();
 		this.id = id;
@@ -55,11 +74,11 @@ public class Apartamento {
 		this.id = id;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

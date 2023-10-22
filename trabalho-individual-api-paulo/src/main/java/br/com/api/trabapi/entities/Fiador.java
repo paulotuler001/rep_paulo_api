@@ -2,6 +2,7 @@ package br.com.api.trabapi.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="fiador")
@@ -16,12 +18,25 @@ public class Fiador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false, unique = true)
 	private Integer id;
+	@Column(length = 60)
+    @NotBlank
 	private String nome;
+	@Column(length = 11)
+    @NotBlank
 	private String cpf;
+	@Column(length = 11)
+    @NotBlank
 	private String telefone;
+	@Column()
+    @NotBlank
 	private Endereco endereco;
+	@Column()
+    @NotBlank
 	private Inquilino inquilino;
+	@Column()
+    @NotBlank
 	private Boolean ativo;
 	
 	@OneToMany

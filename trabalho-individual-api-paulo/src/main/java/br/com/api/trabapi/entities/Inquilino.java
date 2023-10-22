@@ -2,6 +2,7 @@ package br.com.api.trabapi.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "inquilino")
@@ -16,15 +18,31 @@ public class Inquilino {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column()
+	@Column(nullable = false, unique = true)
 	private Integer id;
+	@Column(length = 60)
+    @NotBlank
 	private String nome;
+	@Column(length = 11)
+    @NotBlank
 	private String telefone;
+	@Column(length = 11)
+    @NotBlank
 	private String cpf;
+	@Column()
+    @NotBlank
 	private Double contracheque;
+	@Column()
+    @NotBlank
 	private Endereco end_comercial;
-	private Integer num_apartamento;
+	@Column()
+    @NotBlank
+	private String num_apartamento;
+	@Column()
+    @NotBlank
 	private Double preco_aluguel;
+	@Column()
+    @NotBlank
 	private Boolean ativo;
 	
 	@OneToMany
@@ -37,7 +55,7 @@ public class Inquilino {
 		// TODO Auto-generated constructor stub
 	}
 	public Inquilino(Integer id, String nome, String telefone, String cpf, Double contracheque, Endereco end_comercial,
-			Integer num_apartamento, Double preco_aluguel, Boolean ativo) {
+			String num_apartamento, Double preco_aluguel, Boolean ativo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -85,10 +103,10 @@ public class Inquilino {
 	public void setEnd_comercial(Endereco end_comercial) {
 		this.end_comercial = end_comercial;
 	}
-	public Integer getNum_apartamento() {
+	public String getNum_apartamento() {
 		return num_apartamento;
 	}
-	public void setNum_apartamento(Integer num_apartamento) {
+	public void setNum_apartamento(String num_apartamento) {
 		this.num_apartamento = num_apartamento;
 	}
 	public Double getPreco_aluguel() {
