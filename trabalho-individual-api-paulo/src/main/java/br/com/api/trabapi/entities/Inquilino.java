@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -48,6 +49,10 @@ public class Inquilino {
 	@OneToMany
 	@JoinColumn(name="inquilino_id")
 	private List<Endereco> enderecos;
+	
+	@OneToOne
+	@JoinColumn(name="fiador_id")
+	private Fiador fiador;
 	
 	
 	public Inquilino() {
