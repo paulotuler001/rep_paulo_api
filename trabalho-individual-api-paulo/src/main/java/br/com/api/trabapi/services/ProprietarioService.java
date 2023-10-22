@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.api.trabapi.entities.Proprietario;
+import br.com.api.trabapi.repositories.ProprietarioRepository;
 
 
 public class ProprietarioService {
@@ -46,9 +47,9 @@ public class ProprietarioService {
 		if (objetoTeste.getNome() != null) {
 			registroAntigo.setNome(objetoTeste.getNome());
 		}
-		if (objetoTeste.getDescricao() != null) {
-			registroAntigo.setDescricao(objetoTeste.getDescricao());
-		}
+//		if (objetoTeste.getDescricao() != null) {
+//			registroAntigo.setDescricao(objetoTeste.getDescricao());
+//		}
 		registroAntigo.setId(id);
 		return proprietarioRepository.save(registroAntigo);
 	}

@@ -1,9 +1,13 @@
 package br.com.api.trabapi.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +26,12 @@ public class Inquilino {
 	private Integer num_apartamento;
 	private Double preco_aluguel;
 	private Boolean ativo;
+	
+	@OneToMany
+	@JoinColumn(name="inquilino_id")
+	private List<Endereco> enderecos;
+	
+	
 	public Inquilino() {
 		super();
 		// TODO Auto-generated constructor stub

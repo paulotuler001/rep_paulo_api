@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.api.g4.entities.Categoria;
 import br.com.api.trabapi.entities.Apartamento;
+import br.com.api.trabapi.repositories.ApartamentoRepository;
 
 public class ApartamentoService {
 
@@ -43,12 +43,12 @@ public class ApartamentoService {
 			registroAntigo.setAtivo(objetoTeste.getAtivo());
 		}
 
-		if (objetoTeste.getNome() != null) {
-			registroAntigo.setNome(objetoTeste.getNome());
-		}
-		if (objetoTeste.getDescricao() != null) {
-			registroAntigo.setDescricao(objetoTeste.getDescricao());
-		}
+//		if (objetoTeste.getNome() != null) {
+//			registroAntigo.setNome(objetoTeste.getNome());
+//		}
+//		if (objetoTeste.getDescricao() != null) {
+//			registroAntigo.setDescricao(objetoTeste.getDescricao());
+//		}
 		registroAntigo.setId(id);
 		return apartamentoRepository.save(registroAntigo);
 	}

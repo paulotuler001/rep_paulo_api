@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.api.trabapi.entities.Fiador;
+import br.com.api.trabapi.repositories.FiadorRepository;
 
 public class FiadorService {
 
@@ -45,9 +46,9 @@ public class FiadorService {
 		if (objetoTeste.getNome() != null) {
 			registroAntigo.setNome(objetoTeste.getNome());
 		}
-		if (objetoTeste.getDescricao() != null) {
-			registroAntigo.setDescricao(objetoTeste.getDescricao());
-		}
+//		if (objetoTeste.getDescricao() != null) {
+//			registroAntigo.setDescricao(objetoTeste.getDescricao());
+//		}
 		registroAntigo.setId(id);
 		return fiadorRepository.save(registroAntigo);
 	}
