@@ -158,11 +158,11 @@ public class EmailService {
 			builder.append("</div>\r\n");
 			builder.append("");
 			builder.append("<div align=\"center\">\r\n");
-			builder.append("<p>Parabéns " + nome + " por agora fazer parte do melhor marketplace do mundo!!!</p>");
-			builder.append("<p>Esperamos que tenha uma boa experiência conosco.</p>");
+			builder.append("<p>Parabéns " + nome + " por agora fazer parte do melhor condomínio do mundo!!!</p>");
+			builder.append("<p>Esperamos que tenha uma boa experiência e com seus vizinhos.</p>");
 			builder.append(
 					"<a href=http:\"//localhost:8080/api/swagger-ui/index.html#/\"\"\">Clique aqui para voltar ao site </a>\r\n");
-			builder.append("<p>Atenciosamente Grupo 4.\r\n</p>");
+			builder.append("<p>Atenciosamente Dono do Condomínio 505 AM, Paulo Gustavo.\r\n</p>");
 			builder.append("");
 			builder.append("</div>\r\n");
 			builder.append("</body>\r\n");

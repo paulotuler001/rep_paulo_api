@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.api.trabapi.entities.Usuario;
-//import br.com.api.g4.entities.Usuario;
 import io.jsonwebtoken.Jwts;
 
 @Component

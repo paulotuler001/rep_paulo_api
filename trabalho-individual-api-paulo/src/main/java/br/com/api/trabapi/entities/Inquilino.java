@@ -35,7 +35,7 @@ public class Inquilino {
 	private Double contracheque;
 	@Column()
     @NotBlank
-	private Endereco end_comercial;
+	private String end_comercial;
 	@Column()
     @NotBlank
 	private String num_apartamento;
@@ -59,7 +59,7 @@ public class Inquilino {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Inquilino(Integer id, String nome, String telefone, String cpf, Double contracheque, Endereco end_comercial,
+	public Inquilino(Integer id, String nome, String telefone, String cpf, Double contracheque, String end_comercial,
 			String num_apartamento, Double preco_aluguel, Boolean ativo) {
 		super();
 		this.id = id;
@@ -102,10 +102,10 @@ public class Inquilino {
 	public void setContracheque(Double contracheque) {
 		this.contracheque = contracheque;
 	}
-	public Endereco getEnd_comercial() {
+	public String getEnd_comercial() {
 		return end_comercial;
 	}
-	public void setEnd_comercial(Endereco end_comercial) {
+	public void setEnd_comercial(String end_comercial) {
 		this.end_comercial = end_comercial;
 	}
 	public String getNum_apartamento() {

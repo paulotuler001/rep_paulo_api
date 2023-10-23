@@ -3,10 +3,12 @@ package br.com.api.trabapi.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.api.trabapi.entities.Apartamento;
 import br.com.api.trabapi.repositories.ApartamentoRepository;
 
+@Service
 public class ApartamentoService {
 
 	@Autowired

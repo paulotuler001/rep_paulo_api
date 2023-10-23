@@ -24,22 +24,21 @@ public class Apartamento {
 	@Column(length = 12)
     @NotBlank
 	private String cor;
-	@Column()
+	@Column(length = 12)
 	@NotBlank
 	private Double juros;
-	@Column()
+	@Column(length = 12)
 	@NotBlank
-	private Inquilino inquilino;
-	@Column()
+	private String inquilino;//Inquilino inquilino
 	@NotBlank
-	private Proprietario proprietario;
-	@Column()
+	private String proprietario; //Proprietario proprietario
+	@Column(length = 12)
 	@NotBlank
 	private Double valor;
-	@Column()
+	@Column(length = 12)
 	@NotBlank
 	private Boolean mobilidado;
-	@Column()
+	@Column(length = 12)
 	@NotBlank
 	private Boolean ativo;
 	
@@ -52,8 +51,8 @@ public class Apartamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Apartamento(Integer id, String numero, String cor, Double juros, Inquilino inquilino,
-			Proprietario proprietario, Double valor, Boolean mobilidado, Boolean ativo) {
+	public Apartamento(Integer id, String numero, String cor, Double juros, String inquilino,
+			String proprietario, Double valor, Boolean mobilidado, Boolean ativo) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -98,19 +97,19 @@ public class Apartamento {
 		this.juros = juros;
 	}
 
-	public Inquilino getInquilino() {
+	public String getInquilino() {
 		return inquilino;
 	}
 
-	public void setInquilino(Inquilino inquilino) {
+	public void setInquilino(String inquilino) {
 		this.inquilino = inquilino;
 	}
 
-	public Proprietario getProprietario() {
+	public String getProprietario() {
 		return proprietario;
 	}
 
-	public void setProprietario(Proprietario proprietario) {
+	public void setProprietario(String proprietario) {
 		this.proprietario = proprietario;
 	}
 

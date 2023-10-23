@@ -31,10 +31,10 @@ public class Fiador {
 	private String telefone;
 	@Column()
     @NotBlank
-	private Endereco endereco;
-	@Column()
-    @NotBlank
-	private Inquilino inquilino;
+	private String endereco;
+//	@Column()
+//    @NotBlank
+//	private Inquilino inquilino;
 	@Column()
     @NotBlank
 	private Boolean ativo;
@@ -48,7 +48,7 @@ public class Fiador {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Fiador(Integer id, String nome, String cpf, String telefone, Endereco endereco, Inquilino inquilino,
+	public Fiador(Integer id, String nome, String cpf, String telefone, String endereco, 
 			Boolean ativo) {
 		super();
 		this.id = id;
@@ -56,7 +56,6 @@ public class Fiador {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.endereco = endereco;
-		this.inquilino = inquilino;
 		this.ativo = ativo;
 	}
 	public Integer getId() {
@@ -83,18 +82,13 @@ public class Fiador {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Endereco getEndereco() {
+	public String getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public Inquilino getInquilino() {
-		return inquilino;
-	}
-	public void setInquilino(Inquilino inquilino) {
-		this.inquilino = inquilino;
-	}
+	
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -104,7 +98,7 @@ public class Fiador {
 	@Override
 	public String toString() {
 		return "Fiador [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", endereco="
-				+ endereco + ", inquilino=" + inquilino + ", ativo=" + ativo + "]";
+				+ endereco +  ", ativo=" + ativo + "]";
 	}
 	
 }

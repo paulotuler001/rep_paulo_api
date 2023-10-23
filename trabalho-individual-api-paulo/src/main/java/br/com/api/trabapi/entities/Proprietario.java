@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+//import br.com.api.trabapi.entities.Apartamento;
+
 @Entity
 @Table(name = "proprietario")
 public class Proprietario {
@@ -32,17 +34,17 @@ public class Proprietario {
 	@Column()
     @NotBlank
 	private Double valor_pagamento;
-	@Column()
-    @NotBlank
-	private Apartamento posses; //criar outra entity
+//	@Column()
+//    @NotBlank
+//	private Apartamento posses; //criar outra entity
 	@Column()
     @NotBlank
 	private Boolean ativo;
 	
 	
-	@OneToMany
-	@JoinColumn(name="proprietario_id")
-	private List<Apartamento> apartamentos;
+//	@OneToMany
+//	@JoinColumn(name="proprietario_id")
+//	private List<Apartamento> apartamentos;
 	
 	
 	
@@ -51,14 +53,13 @@ public class Proprietario {
 		// TODO Auto-generated constructor stub
 	}
 	public Proprietario(Integer id, String nome, String telefone, String cpf, Double valor_pagamento,
-			Apartamento posses, Boolean ativo) {
+			 Boolean ativo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.cpf = cpf;
 		this.valor_pagamento = valor_pagamento;
-		this.posses = posses;
 		this.ativo = ativo;
 	}
 	public Integer getId() {
@@ -91,12 +92,6 @@ public class Proprietario {
 	public void setValor_pagamento(Double valor_pagamento) {
 		this.valor_pagamento = valor_pagamento;
 	}
-	public Apartamento getPosses() {
-		return posses;
-	}
-	public void setPosses(Apartamento posses) {
-		this.posses = posses;
-	}
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -106,7 +101,7 @@ public class Proprietario {
 	@Override
 	public String toString() {
 		return "Proprietario [id=" + id + ", nome=" + nome + ", telefone=" + telefone + ", cpf=" + cpf
-				+ ", valor_pagamento=" + valor_pagamento + ", posses=" + posses + ", ativo=" + ativo + "]";
+				+ ", valor_pagamento=" + valor_pagamento + ", ativo=" + ativo + "]";
 	}
 	
 }

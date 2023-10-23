@@ -49,16 +49,15 @@ public class SwaggerConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()) 
 				.securityContexts(Collections.singletonList(securityContext())).securitySchemes(Arrays.asList(apiKey()))
-
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.api.g4.controllers")) 
+				.apis(RequestHandlerSelectors.basePackage("br.com.api.trabapi.controllers")) 
 				.paths(PathSelectors.any()) 
 				.build();
 	}
 
 	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfoBuilder().title("Documentação da api de teste")
-				.description("Descrição projeto de aula").license("Apache license version 2.0").version("14.17.1")
+		ApiInfo apiInfo = new ApiInfoBuilder().title("Documentação da api individual")
+				.description("Descrição projeto individual").license("Apache license version 2.0").version("5.3.0")
 				.build();
 		return apiInfo;
 	}
