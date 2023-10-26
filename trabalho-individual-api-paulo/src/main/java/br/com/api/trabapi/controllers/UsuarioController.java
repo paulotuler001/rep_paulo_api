@@ -1,5 +1,6 @@
 package br.com.api.trabapi.controllers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.api.trabapi.config.JWTUtil;
 import br.com.api.trabapi.dto.LoginDTO;
 import br.com.api.trabapi.dto.UsuarioDTO;
+import br.com.api.trabapi.dto.UsuarioRespostaDTO;
 import br.com.api.trabapi.entities.Endereco;
 import br.com.api.trabapi.entities.Role;
 import br.com.api.trabapi.entities.Usuario;
@@ -69,52 +71,41 @@ public class UsuarioController {
 		return usuarioService.getCount();
 	}
 
-	@PostMapping("/salvar")
-	public Usuario salvar(@RequestBody UsuarioDTO objetousuario) {
-
-		return usuarioService.salvar(objetousuario);
-	}
-
 	@GetMapping("/{id}")
-	public Usuario acharId(@PathVariable Integer id) {
+	public UsuarioRespostaDTO acharId(@PathVariable Integer id) {
 		return usuarioService.acharId(id);
 	}
 
 	@GetMapping("/listar")
-	public List<Usuario> listar() {
+	public List<UsuarioRespostaDTO> listar() {
 		return usuarioService.listar();
 	}
 
 	@DeleteMapping("/deletarLogico/{id}")
 	public void deletarLogico(@PathVariable Integer id) {
-		emailService.envioEmailDelete(acharId(id));
+		emailService.envioEmailDelete(usuarioRepository.findById(id).get());
 		usuarioService.deletarLogico(id);
 	}
 
-	@PutMapping("/atualizar/{id}")
-	public Usuario atualizar(@PathVariable Integer id, @RequestBody UsuarioDTO objetousuario) {
-		return usuarioService.atualizar(id, objetousuario);
-	}
+//	@PutMapping("/atualizar/{id}")
+//	public Usuario atualizar(@PathVariable Integer id, @RequestBody UsuarioDTO objetousuario) {
+//		return usuarioService.atualizar(id, objetousuario);
+//	}
 
-	@GetMapping("/listarEndereco/{id}")
-	public List<Endereco> getEndereco(@PathVariable Integer id) {
-		return usuarioService.listarEndereco();
-	}
-
-	// TODO verificar a mensagem de recuperaçao de senha é valida
 	@PutMapping("/recuperarSenha/{id}")
 	public void recuperarSenha(@PathVariable Integer id, @RequestParam String senha) {
 		usuarioService.recuperarSenha(id, senha);
-		emailService.envioEmailRecuperacaoSenha(acharId(id));
+		emailService.envioEmailRecuperacaoSenha(usuarioRepository.findById(id).get());
 	}
 
 	@PutMapping("/recuperarConta/{id}")
 	public void recuperarConta(@PathVariable Integer id) {
 		usuarioService.recuperarConta(id);
-		emailService.envioEmailRecuperacaoConta(acharId(id));
+		emailService.envioEmailRecuperacaoConta(usuarioRepository.findById(id).get());
 	}
 
 	// Registro de usuario
+	@SuppressWarnings("unused")
 	@PostMapping("/registro")
 	public Usuario cadastro(@RequestParam String email, @RequestBody UsuarioDTO usuario) {
 
@@ -122,8 +113,13 @@ public class UsuarioController {
 
 		// Gerando o token JWT a partir do e-mail do Usuario
 		// String token = jwtUtil.generateToken(usuario.getEmail());
-
-		Set<String> strRoles = usuario.getRoles();
+		Set<String> usuarioMaiusculo =new HashSet<>();
+		
+		for (String str : usuario.getRoles()) {
+			usuarioMaiusculo.add(str.toUpperCase());
+        }
+		
+		Set<String> strRoles = usuarioMaiusculo;
 		Set<Role> roles = new HashSet<>();
 
 		if (strRoles == null) {
@@ -141,7 +137,7 @@ public class UsuarioController {
 					roles.add(adminRole);
 					break;
 				case "INQUILINO":
-					Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_INQUILINO)
+					Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_PROPRIETARIO)
 							.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
 					roles.add(usuarioRole);
 				}
@@ -158,7 +154,6 @@ public class UsuarioController {
 		endereco.setLogradouro(viaCep.getLogradouro());
 		endereco.setUf(viaCep.getUf());
 		endereco.setAtivo(true);
-		enderecoRepository.save(endereco);
 
 		Usuario usuarioResumido = new Usuario();
 		usuarioResumido.setAtivo(true);
@@ -171,9 +166,15 @@ public class UsuarioController {
 		// Encriptando a senha usando o Bcrypt
 		String encodedPass = passwordEncoder.encode(usuario.getPassword());
 		usuarioResumido.setPassword(encodedPass);
+		usuarioRepository.save(usuarioResumido);
+
+		List<Endereco> enderecos = new ArrayList<>();
+		enderecos.add(endereco);
+		usuarioResumido.setEndereco(enderecos);
 //        String token = jwtUtil.generateTokenWithUsuarioData(usuarioResumido);
 //        Collections.singletonMap("jwt-token", token);
 
+		enderecoRepository.save(endereco);
 		emailService.envioEmailCadastro(usuario);
 		return usuarioRepository.save(usuarioResumido);
 	}
