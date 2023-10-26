@@ -9,7 +9,7 @@ import br.com.api.trabapi.entities.Apartamento;
 @Repository
 public interface ApartamentoRepository extends JpaRepository<Apartamento, Integer> {
 
-	@Query(value = "select count(*) from categoria ", nativeQuery = true)
+	@Query(value = "select count(*) from apartamento ", nativeQuery = true)
 	public Integer contar();
 
 }

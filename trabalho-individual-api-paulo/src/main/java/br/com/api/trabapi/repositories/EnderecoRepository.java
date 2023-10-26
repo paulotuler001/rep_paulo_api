@@ -10,7 +10,7 @@ import br.com.api.trabapi.entities.Endereco;
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 	
-	@Query(value="select count(*) from categoria ", nativeQuery=true)
+	@Query(value="select count(*) from endereco ", nativeQuery=true)
     public Integer contar();
 
 }
