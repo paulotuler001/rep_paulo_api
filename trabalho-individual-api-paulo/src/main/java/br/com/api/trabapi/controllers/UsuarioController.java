@@ -128,20 +128,20 @@ public class UsuarioController {
 
 		if (strRoles == null) {
 			// Se não houver roles especificadas, atribui o papel de USUÁRIO
-			Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_COMPRADOR)
+			Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_PROPRIETARIO)
 					.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
 			roles.add(usuarioRole);
 		} else {
 			// Mapeando roles especificadas para objetos Role
 			strRoles.forEach(role -> {
 				switch (role) {
-				case "VENDEDOR":
-					Role adminRole = roleRepository.findByName(TipoRoleEnum.ROLE_VENDEDOR)
+				case "PROPRIETARIO":
+					Role adminRole = roleRepository.findByName(TipoRoleEnum.ROLE_PROPRIETARIO)
 							.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
 					roles.add(adminRole);
 					break;
-				case "COMPRADOR":
-					Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_COMPRADOR)
+				case "INQUILINO":
+					Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_INQUILINO)
 							.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
 					roles.add(usuarioRole);
 				}

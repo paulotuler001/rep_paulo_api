@@ -14,7 +14,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,26 +31,26 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // informa q é pk
 	private Integer id;
-	@Column( length = 40)
-	@NotBlank
+	@NotNull(message = "Nome não pode ser nulo.")
+	@NotBlank(message = "Nome não pode ser vazio.")
+	@Size(max = 50)
 	private String nome;
-	@Column( length = 20)
-	@NotBlank
+	@NotNull(message = "Nome de usuario não pode ser nulo.")
+	@NotBlank(message = "Nome de usuario não pode ser vazio.")
+	@Size(max = 50)
 	private String nomeUsuario;
-	@Column()
-	@NotBlank
+	@NotNull(message = "EMAIL não pode ser nulo.")
+	@NotBlank(message = "EMAIL não pode ser vazio.")
+	@Email
+	@Column(unique = true)
 	private String email;
-	@Column( length = 11)
-	@NotBlank
+	@NotNull(message = "CPF não pode ser nulo.")
+	@NotBlank(message = "CPF não pode ser vazio.")
+	@Size(max = 11)
 	private String cpf;
-	@Column( length = 10)
-	@NotBlank
 	private LocalDate dataNascimento;
-	@Column(nullable = false)
-	@NotBlank
 	private Boolean ativo;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@NotBlank
 	private String password;
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
@@ -157,7 +163,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", nomeUsuario=" + nomeUsuario + ", email=" + email + ", cpf="
 				+ cpf + ", dataNascimento=" + dataNascimento + ", ativo=" + ativo + ", password=" + password
-				+  ", endereco=" + endereco + ", roles=" + roles
+				+ ", endereco=" + endereco + ", roles=" + roles
 				+ "]";
 	}
 }

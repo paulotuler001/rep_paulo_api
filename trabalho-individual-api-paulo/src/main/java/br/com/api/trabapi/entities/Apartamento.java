@@ -42,9 +42,13 @@ public class Apartamento {
 	@NotBlank
 	private Boolean ativo;
 	
-	@OneToOne
-	@JoinColumn(name="inquilino_id")
-	private Inquilino inquilino1;
+//	@OneToOne
+//	@JoinColumn(name="inquilino_id")
+////	private Inquilino inquilino1;
+//	
+//	@OneToOne
+//	@JoinColumn(name="proprietario_id")
+//	private Proprietario proprietario1;
 	
 	public Apartamento() {
 		super();

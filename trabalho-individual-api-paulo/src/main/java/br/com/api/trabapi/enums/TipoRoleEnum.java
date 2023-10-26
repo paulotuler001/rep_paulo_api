@@ -2,8 +2,8 @@ package br.com.api.trabapi.enums;
 
 public enum TipoRoleEnum {
 
-	ROLE_COMPRADOR("COMPRADOR"),
-	ROLE_VENDEDOR("VENDEDOR");
+	ROLE_INQUILINO("INQUILINO"),
+	ROLE_PROPRIETARIO("PROPRIETARIO");
 
 	private String tipo;
 
