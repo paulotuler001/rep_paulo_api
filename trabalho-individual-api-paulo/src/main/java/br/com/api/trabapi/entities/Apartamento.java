@@ -24,22 +24,22 @@ public class Apartamento {
 	@Column(length = 12)
     @NotBlank
 	private String cor;
-	@Column(length = 12)
-	@NotBlank
+//	@Column(length = 12)
+//	@NotBlank
 	private Double juros;
 	@Column(length = 12)
 	@NotBlank
 	private String inquilino;//Inquilino inquilino
 	@NotBlank
 	private String proprietario; //Proprietario proprietario
-	@Column(length = 12)
-	@NotBlank
+//	@Column(length = 12)
+//	@NotBlank
 	private Double valor;
 	@Column(length = 12)
-	@NotBlank
+//	@NotBlank
 	private Boolean mobilidado;
 	@Column(length = 12)
-	@NotBlank
+//	@NotBlank
 	private Boolean ativo;
 	
 //	@OneToOne

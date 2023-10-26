@@ -7,36 +7,42 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "endereco")
 public class Endereco {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // informa q é pk
-    @Column(nullable = false, unique = true)
+    
     private Integer id;
-    @Column(length = 9)
-    @NotBlank
+    @NotNull(message = "CEP não pode ser nulo.")
+	@NotBlank(message = "CEP não pode ser vazio.")
+	@Size(max = 9)
     private String cep;
-    @Column(length = 60)
-    @NotBlank
+    @NotNull(message = "Logradouro não pode ser nulo.")
+   	@NotBlank(message = "Logradouro não pode ser vazio.")
+   	@Size(max = 60)
     private String logradouro;
-    @Column(length = 40)
+   	@Size(max = 60)
     private String complemento;
-    @Column(length = 30)
-    @NotBlank
+    @NotNull(message = "Bairro não pode ser nulo.")
+   	@NotBlank(message = "Bairro não pode ser vazio.")
+   	@Size(max = 60)
     private String bairro;
-    @Column(length = 30)
-    @NotBlank
+    @NotNull(message = "Localidade não pode ser nulo.")
+   	@NotBlank(message = "Localidade não pode ser vazio.")
+   	@Size(max = 60)
     private String localidade;
-    @Column(length = 2)
-    @NotBlank
+    @NotNull(message = "UF não pode ser nulo.")
+   	@NotBlank(message = "UF não pode ser vazio.")
+   	@Size(max = 2)
     private String uf;
-    @Column()
-    @NotBlank
+   
     private Boolean ativo;
-    @Column(length = 10)
+    @NotNull
     @NotBlank
     private String numero;
     

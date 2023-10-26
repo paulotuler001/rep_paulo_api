@@ -58,6 +58,10 @@ public class Usuario {
 	@ManyToMany
 	@JoinTable(name = "usuario_role", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
+	
+	@OneToMany
+	@JoinColumn(name="usuario_id")
+	 private List<Apartamento> apartamentos;
 
 	public Usuario() {
 		super();
