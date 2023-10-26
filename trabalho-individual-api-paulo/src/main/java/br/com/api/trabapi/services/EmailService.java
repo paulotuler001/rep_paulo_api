@@ -68,8 +68,8 @@ public class EmailService {
 //		MimeMessage mensagemCadastro = emailSender.createMimeMessage();
 //		try {
 //			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
-//			helper.setFrom("gp4api.serratec@gmail.com");
-//			helper.setTo("oliveiraagall@gmail.com");
+//			helper.setFrom("condom.505am@gmail.com");
+//			helper.setTo("paulogustavotuler@gmail.com");
 //			helper.setSubject("seu pedido esta sendo enviado");
 //
 //			LocalDate localDate = LocalDate.now();
@@ -134,14 +134,13 @@ public class EmailService {
 //			e.printStackTrace();
 //		}
 //	}
-
 	public void envioEmailCadastro(UsuarioDTO objetousuario) {
 		MimeMessage mensagemCadastro = emailSender.createMimeMessage();
 
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
-			helper.setFrom("gp4api.serratec@gmail.com");
-			helper.setTo("oliveiraagall@gmail.com");
+			helper.setFrom("condom.505am@gmail.com");
+			helper.setTo(objetousuario.getEmail());
 			String nome = objetousuario.getNome();
 			helper.setSubject("Olá " + nome + " sua conta foi criada com sucesso.");
 
@@ -159,10 +158,10 @@ public class EmailService {
 			builder.append("");
 			builder.append("<div align=\"center\">\r\n");
 			builder.append("<p>Parabéns " + nome + " por agora fazer parte do melhor condomínio do mundo!!!</p>");
-			builder.append("<p>Esperamos que tenha uma boa experiência e com seus vizinhos.</p>");
+			builder.append("<p>Esperamos que tenha uma boa experiência conosco.</p>");
 			builder.append(
 					"<a href=http:\"//localhost:8080/api/swagger-ui/index.html#/\"\"\">Clique aqui para voltar ao site </a>\r\n");
-			builder.append("<p>Atenciosamente Dono do Condomínio 505 AM, Paulo Gustavo.\r\n</p>");
+			builder.append("<p>Atenciosamente Grupo Condom 505 AM.\r\n</p>");
 			builder.append("");
 			builder.append("</div>\r\n");
 			builder.append("</body>\r\n");
@@ -185,8 +184,8 @@ public class EmailService {
 
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
-			helper.setFrom("gp4api.serratec@gmail.com");
-			helper.setTo("oliveiraagall@gmail.com");
+			helper.setFrom("condom.505am@gmail.com");
+			helper.setTo(usuario.getEmail());
 			String nome = usuario.getNome();
 			helper.setSubject("Olá " + nome + " sua conta foi apagada com sucesso.");
 
@@ -197,7 +196,7 @@ public class EmailService {
 					+ "<div align=\"center\">\r\n" + ""
 					+ "<p>Agradecemos por utilizar nossos serviços, sua conta foi finalizada.</p>"
 					+ "<p>Esperamos que você tenha tido uma boa experiência conosco! Até a próxima ;)</p>"
-					+ "<p>Atenciosamente Grupo 4.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
+					+ "<p>Atenciosamente Grupo Condom 505 AM.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
 
 			helper.setText(builder.toString(), true);
 
@@ -216,8 +215,8 @@ public class EmailService {
 //
 //		try {
 //			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
-//			helper.setFrom("gp4api.serratec@gmail.com");
-//			helper.setTo("oliveiraagall@gmail.com");
+//			helper.setFrom("condom.505am@gmail.com");
+//			helper.setTo("paulogustavotuler@gmail.com");
 //			helper.setSubject("Olá, veja os produtos em promoção essa semana.");
 //
 //			StringBuilder builder = new StringBuilder();
@@ -234,7 +233,7 @@ public class EmailService {
 //			builder.append("</div>" + "<div align=\"center\">\r\n" + "<p>Não perca essas ofertas que estão no site.</p>"
 //					+ "<p>é por tempo limitado! Não vai perder essa chance, ein?!</p>"
 //					+ "<a href=\"http://localhost:8080/api/swagger-ui/index.html#/\">Clique aqui para ver essas ofertas </a>"
-//					+ "<p>Atenciosamente Grupo 4.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
+//					+ "<p>Atenciosamente Grupo Condom 505 AM.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
 //
 //			helper.setText(builder.toString(), true);
 //
@@ -254,7 +253,7 @@ public class EmailService {
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
 			helper.setFrom("gp4api.serratec@gmail.com");
-			helper.setTo("oliveiraagall@gmail.com");
+			helper.setTo(usuario.getEmail());
 			String nome = usuario.getNome();
 			helper.setSubject("Olá " + nome + " vamos recuperar a sua senha");
 			StringBuilder builder = new StringBuilder();
@@ -262,9 +261,9 @@ public class EmailService {
 					+ "<h1>Recuperação de senha</h1>\r\n" + "</div>\r\n" + "<br/>\r\n" + ""
 					+ "<div align=\"center\">\r\n" + "<img src=\"cid:logo\">" + "</div>\r\n" + ""
 					+ "<div align=\"center\">\r\n"
-					+ "<p>Se vocé pediu a redefinição de senha<a href=\"http://localhost:8080/api/swagger-ui/index.html#/\"> clique aqui</a>.</p>"
-					+ "<p>Se vocé não reconhece essa requisição ignore esse email.</p>"
-					+ "<p>Atenciosamente Grupo 4.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
+					+ "<p>Sua senha foi alterada com sucesso!</p>"
+					+ "<p>Se você não reconhece essa requisição, melhore sua segurança.</p>"
+					+ "<p>Atenciosamente Grupo Condom 505 AM.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
 
 			helper.setText(builder.toString(), true);
 
@@ -284,7 +283,7 @@ public class EmailService {
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
 			helper.setFrom("gp4api.serratec@gmail.com");
-			helper.setTo("oliveiraagall@gmail.com");
+			helper.setTo(usuario.getEmail());
 			String nome = usuario.getNome();
 			helper.setSubject("Olá " + nome + " vamos recuperar o sua conta");
 			StringBuilder builder = new StringBuilder();
@@ -294,7 +293,7 @@ public class EmailService {
 					+ "<div align=\"center\">\r\n"
 					+ "<p>Se vocé estáá tentando recuperar sua conta, <a href=\"http://localhost:8080/api/swagger-ui/index.html#/\">clique aqui</a> para ver o e-mail cadastrado.</p>"
 					+ "<p>Se vocé não reconhece essa requisição ignore esse email.</p>"
-					+ "<p>Atenciosamente Grupo 4.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
+					+ "<p>Atenciosamente Grupo Condom 505 AM.</p>" + "</div>" + "</body>\r\n" + "</html>\r\n");
 
 			helper.setText(builder.toString(), true);
 
