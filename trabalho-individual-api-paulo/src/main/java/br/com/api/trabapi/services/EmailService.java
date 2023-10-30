@@ -1,5 +1,10 @@
 package br.com.api.trabapi.services;
 
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -15,7 +20,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import br.com.api.trabapi.dto.AluguelDeApartamentoDTO;
 import br.com.api.trabapi.dto.UsuarioDTO;
+import br.com.api.trabapi.entities.Aluguel;
 import br.com.api.trabapi.entities.Usuario;
 
 @Configuration
@@ -24,6 +31,12 @@ public class EmailService {
 
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	ApartamentoService apartamentoService;
+	
+	@Autowired
+	AluguelService aluguelService;
 
 	private JavaMailSender emailSender;
 
@@ -33,7 +46,7 @@ public class EmailService {
 	}
 
 //	@Autowired
-//	Pedido pedido;
+//	Aluguel aluguel;
 
 	@Value("${spring.mail.host}")
 	private String host;
@@ -62,40 +75,52 @@ public class EmailService {
 		return emailSender;
 	}
 
-//	 TODO terminar metodo e botar no pedido
-//	public void envioEmailPedido(PedidoDeProdutoDTO pedidon) {
-//		Pedido pedido = pedidoService.parsePedidoDeProduto(pedidon);
-//		MimeMessage mensagemCadastro = emailSender.createMimeMessage();
-//		try {
-//			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
-//			helper.setFrom("condom.505am@gmail.com");
-//			helper.setTo("paulogustavotuler@gmail.com");
-//			helper.setSubject("seu pedido esta sendo enviado");
-//
-//			LocalDate localDate = LocalDate.now();
-//			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//			String dataEntrega = localDate.plusDays(7).format(format);
-//			double valorTotal = 0;
-//			List<String> nomes =new ArrayList<>();
-//			List<Double> valores=new ArrayList<>();
-//			
+//	 TODO terminar metodo e botar no aluguel
+	public void envioEmailAluguel(AluguelDeApartamentoDTO alugueln) {
+		Aluguel aluguel = aluguelService.parseAluguelDeApartamento(alugueln);
+		MimeMessage mensagemCadastro = emailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
+			helper.setFrom("condom.505am@gmail.com");
+			helper.setTo("paulogustavotuler@gmail.com");
+			helper.setSubject("seu aluguel esta sendo enviado");
+
+			LocalDate localDate = LocalDate.now();
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			String dataEntrega = localDate.plusDays(7).format(format);
+			double valorTotal = 0;
+			List<String> nomes = new ArrayList<>();
+			List<Double> valores = new ArrayList<>();
+
 //			for (int i = 0; i < pedido.getProdutos().size(); i++) {
 //				
 //				valores.add(pedido.getProdutos().get(i).getValorUnitario());
 //				nomes.add(pedido.getProdutos().get(i).getNome());
 //				valorTotal += pedido.getProdutos().get(i).getValorUnitario();
 //			}
-//			
-//			DecimalFormat df = new DecimalFormat("R$ ,##0.00");
-//
-//			StringBuilder builder = new StringBuilder();
-//			builder.append("<html>\r\n");
-//			builder.append("<body>\r\n");
-//			builder.append("<div align=\"center\">\r\n");
-//			builder.append("<h1>Convite</h1>\r\n");
-//			builder.append("</div>\r\n");
-//			builder.append("<br/> \r\n");
-//
+
+			DecimalFormat df = new DecimalFormat("R$ ,##0.00");
+
+			StringBuilder builder = new StringBuilder();
+			builder.append("<html>\r\n");
+			builder.append("<body>\r\n");
+			builder.append("<div align=\"center\">\r\n");
+			builder.append("<h1>Seu pedido foi finalizado com sucesso</h1>\r\n");
+			builder.append("</div>\r\n");
+			builder.append("<br> \r\n");
+			builder.append("<div align=\"center\">\r\n");
+			builder.append("<img src=\"cid:logo\">");
+			builder.append("</div>\r\n");
+			builder.append("");
+			builder.append("<div align=\"center\">\r\n");
+			builder.append("<p>Parabéns! Seu pedido foi realizado com sucesso</p>\r\n");
+			builder.append("<p></p>");
+			builder.append(
+					"<a href=http:\"//localhost:8080/api/swagger-ui/index.html#/\"\"\">Clique aqui para voltar ao site </a>\r\n");
+			builder.append("<p>Atenciosamente Grupo 4.\r\n</p>");
+			builder.append("");
+			builder.append("</div>\r\n");
+
 //			builder.append("<center>");
 //			builder.append("<table border='2' cellpadding='4'> \r\n");
 //			builder.append("<tr> <th> Nome </th> <\r\n");
@@ -124,16 +149,18 @@ public class EmailService {
 //			builder.append(df.format(valorTotal));
 //			builder.append(" </td>\r\n");
 //			builder.append(" </table>\r\n");
-//			builder.append(" </body>\r\n");
-//			builder.append("</html>");
-//
-//			helper.setText(builder.toString(), true);
-//			emailSender.send(mensagemCadastro);
-//
-//		} catch (MessagingException e) {
-//			e.printStackTrace();
-//		}
-//	}
+			builder.append(" </body>\r\n");
+			builder.append("</html>");
+
+			helper.setText(builder.toString(), true);
+			ClassPathResource imageResource = new ClassPathResource("img/logo.png");
+			helper.addInline("logo", imageResource);
+			emailSender.send(mensagemCadastro);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
 	public void envioEmailCadastro(UsuarioDTO objetousuario) {
 		MimeMessage mensagemCadastro = emailSender.createMimeMessage();
 
@@ -157,11 +184,11 @@ public class EmailService {
 			builder.append("</div>\r\n");
 			builder.append("");
 			builder.append("<div align=\"center\">\r\n");
-			builder.append("<p>Parabéns " + nome + " por agora fazer parte do melhor condomínio do mundo!!!</p>");
+			builder.append("<p>Parabéns " + nome + " por agora fazer parte do melhor marketplace do mundo!!!</p>");
 			builder.append("<p>Esperamos que tenha uma boa experiência conosco.</p>");
 			builder.append(
 					"<a href=http:\"//localhost:8080/api/swagger-ui/index.html#/\"\"\">Clique aqui para voltar ao site </a>\r\n");
-			builder.append("<p>Atenciosamente Grupo Condom 505 AM.\r\n</p>");
+			builder.append("<p>Atenciosamente Grupo 4.\r\n</p>");
 			builder.append("");
 			builder.append("</div>\r\n");
 			builder.append("</body>\r\n");

@@ -13,6 +13,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.api.trabapi.dto.UsuarioDTO;
 import br.com.api.trabapi.entities.Usuario;
 import io.jsonwebtoken.Jwts;
 

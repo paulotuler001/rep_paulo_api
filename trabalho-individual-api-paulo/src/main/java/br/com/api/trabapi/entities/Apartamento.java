@@ -1,12 +1,17 @@
 package br.com.api.trabapi.entities;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -27,11 +32,8 @@ public class Apartamento {
 //	@Column(length = 12)
 //	@NotBlank
 	private Double juros;
-	@Column(length = 12)
 	@NotBlank
-	private String inquilino;//Inquilino inquilino
-	@NotBlank
-	private String proprietario; //Proprietario proprietario
+	private String descricao;
 //	@Column(length = 12)
 //	@NotBlank
 	private Double valor;
@@ -41,6 +43,14 @@ public class Apartamento {
 	@Column(length = 12)
 //	@NotBlank
 	private Boolean ativo;
+	private Double valorUnitario;
+	@Column(length = 9)
+    @NotBlank
+	private Integer qntdEstoque;
+	@ElementCollection
+	@CollectionTable(name = "aluguel_apartamento", joinColumns = @JoinColumn(name = "apartamento_id"))
+	@MapKeyJoinColumn(name = "aluguel_id")
+	private Map<Aluguel, AluguelApartamentoEntry> itemQuantidade = new HashMap<>();
 	
 //	@OneToOne
 //	@JoinColumn(name="inquilino_id")
@@ -55,18 +65,43 @@ public class Apartamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Apartamento(Integer id, String numero, String cor, Double juros, String inquilino,
-			String proprietario, Double valor, Boolean mobilidado, Boolean ativo) {
+	
+	
+
+	public Apartamento(Integer id, @NotBlank String numero, @NotBlank String cor, Double juros,
+			@NotBlank String descricao, Double valor, Boolean mobilidado, Boolean ativo, Double valorUnitario,
+			@NotBlank Integer qntdEstoque, Map<Aluguel, AluguelApartamentoEntry> itemQuantidade) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.cor = cor;
 		this.juros = juros;
-		this.inquilino = inquilino;
-		this.proprietario = proprietario;
+		this.descricao = descricao;
 		this.valor = valor;
 		this.mobilidado = mobilidado;
 		this.ativo = ativo;
+		this.valorUnitario = valorUnitario;
+		this.qntdEstoque = qntdEstoque;
+		this.itemQuantidade = itemQuantidade;
+	}
+
+
+
+
+	public Integer getQntdEstoque() {
+		return qntdEstoque;
+	}
+
+	public void setQntdEstoque(Integer qntdEstoque) {
+		this.qntdEstoque = qntdEstoque;
+	}
+
+	public Map<Aluguel, AluguelApartamentoEntry> getItemQuantidade() {
+		return itemQuantidade;
+	}
+
+	public void setItemQuantidade(Map<Aluguel, AluguelApartamentoEntry> itemQuantidade) {
+		this.itemQuantidade = itemQuantidade;
 	}
 
 	public Integer getId() {
@@ -101,21 +136,7 @@ public class Apartamento {
 		this.juros = juros;
 	}
 
-	public String getInquilino() {
-		return inquilino;
-	}
-
-	public void setInquilino(String inquilino) {
-		this.inquilino = inquilino;
-	}
-
-	public String getProprietario() {
-		return proprietario;
-	}
-
-	public void setProprietario(String proprietario) {
-		this.proprietario = proprietario;
-	}
+	
 
 	public Double getValor() {
 		return valor;
@@ -141,11 +162,47 @@ public class Apartamento {
 		this.ativo = ativo;
 	}
 
+
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+
+
+	public Double getValorUnitario() {
+		return valorUnitario;
+	}
+
+
+
+
+	public void setValorUnitario(Double valorUnitario) {
+		this.valorUnitario = valorUnitario;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "Apartamento [id=" + id + ", numero=" + numero + ", cor=" + cor + ", juros=" + juros + ", inquilino="
-				+ inquilino + ", proprietario=" + proprietario + ", valor=" + valor + ", mobilidado=" + mobilidado
-				+ ", ativo=" + ativo + "]";
+		return "Apartamento [id=" + id + ", numero=" + numero + ", cor=" + cor + ", juros=" + juros + ", descricao="
+				+ descricao + ", valor=" + valor + ", mobilidado=" + mobilidado + ", ativo=" + ativo
+				+ ", valorUnitario=" + valorUnitario + ", qntdEstoque=" + qntdEstoque + ", itemQuantidade="
+				+ itemQuantidade + "]";
 	}
+
+	
+
+	
 	
 }

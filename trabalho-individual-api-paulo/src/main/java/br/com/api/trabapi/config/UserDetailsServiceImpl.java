@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import br.com.api.trabapi.dto.UsuarioDTO;
 import br.com.api.trabapi.entities.Usuario;
 import br.com.api.trabapi.repositories.RoleRepository;
 import br.com.api.trabapi.repositories.UsuarioRepository;

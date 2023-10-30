@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,7 @@ import br.com.api.trabapi.dto.LoginDTO;
 import br.com.api.trabapi.dto.UsuarioDTO;
 import br.com.api.trabapi.dto.UsuarioRespostaDTO;
 import br.com.api.trabapi.entities.Endereco;
+import br.com.api.trabapi.entities.LoginResponse;
 import br.com.api.trabapi.entities.Role;
 import br.com.api.trabapi.entities.Usuario;
 import br.com.api.trabapi.enums.TipoRoleEnum;
@@ -137,8 +137,12 @@ public class UsuarioController {
 					roles.add(adminRole);
 					break;
 				case "INQUILINO":
-					Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_PROPRIETARIO)
+					Role usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_INQUILINO)
 							.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
+					roles.add(usuarioRole);
+				case "FIADOR":
+					 usuarioRole = roleRepository.findByName(TipoRoleEnum.ROLE_FIADOR)
+					.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
 					roles.add(usuarioRole);
 				}
 			});
@@ -179,9 +183,8 @@ public class UsuarioController {
 		return usuarioRepository.save(usuarioResumido);
 	}
 
-	// Login de usuario
 	@PostMapping("/login")
-	public Map<String, Object> login(@RequestBody LoginDTO body) {
+	public LoginResponse login(@RequestBody LoginDTO body) {
 		try {
 			// Criando o token que sera usado no processo de autenticacao
 			UsernamePasswordAuthenticationToken authInputToken = new UsernamePasswordAuthenticationToken(
@@ -197,6 +200,13 @@ public class UsuarioController {
 			Usuario usuario = usuarioService.findByEmail(body.getEmail());
 			Usuario usuarioResumido = new Usuario();
 			usuarioResumido.setNomeUsuario(usuario.getNomeUsuario());
+//			usuarioResumido.setNome(usuario.getNome());
+//			usuarioResumido.setCpf(usuario.getCpf());
+//			usuarioResumido.setDataNascimento(usuario.getDataNascimento());
+//			usuarioResumido.setAtivo(true);
+//			usuarioResumido.setAluguels(usuario.getAluguels());
+//			usuarioResumido.setApartamentos(usuario.getApartamentos());
+//			usuarioResumido.setEndereco(usuario.getEndereco());
 			usuarioResumido.setEmail(usuario.getEmail());
 			usuarioResumido.setId(usuario.getId());
 			usuarioResumido.setRoles(usuario.getRoles());
@@ -204,10 +214,50 @@ public class UsuarioController {
 			String token = jwtUtil.generateTokenWithUsuarioData(usuarioResumido);
 
 			// Responde com o JWT
-			return Collections.singletonMap("jwt-token", token);
+			return new LoginResponse(token);
 		} catch (AuthenticationException authExc) {
 			throw new RuntimeException("Credenciais Invalidas");
 		}
 	}
+	
+	
+	
+	// Login de usuario
+//	@PostMapping("/login")
+//	public Map<String, Object> login(@RequestBody LoginDTO body) {
+//		try {
+//			// Criando o token que sera usado no processo de autenticacao
+//			UsernamePasswordAuthenticationToken authInputToken = new UsernamePasswordAuthenticationToken(
+//					body.getEmail(), body.getPassword());
+//
+//			// Autenticando as credenciais de login
+//			authManager.authenticate(authInputToken);
+//
+//			// Se o processo de autenticacao foi concluido com sucesso - etapa anterior,
+//			// eh gerado o JWT
+////            String token = jwtUtil.generateToken(body.getEmail());
+//
+//			Usuario usuario = usuarioService.findByEmail(body.getEmail());
+//			Usuario usuarioResumido = new Usuario();
+//			usuarioResumido.setNomeUsuario(usuario.getNomeUsuario());
+////			usuarioResumido.setNome(usuario.getNome());
+////			usuarioResumido.setCpf(usuario.getCpf());
+////			usuarioResumido.setDataNascimento(usuario.getDataNascimento());
+////			usuarioResumido.setAtivo(true);
+////			usuarioResumido.setAluguels(usuario.getAluguels());
+////			usuarioResumido.setApartamentos(usuario.getApartamentos());
+////			usuarioResumido.setEndereco(usuario.getEndereco());
+//			usuarioResumido.setEmail(usuario.getEmail());
+//			usuarioResumido.setId(usuario.getId());
+//			usuarioResumido.setRoles(usuario.getRoles());
+//			// Gerando o token JWT a partir dos dados do Usuario
+//			String token = jwtUtil.generateTokenWithUsuarioData(usuarioResumido);
+//
+//			// Responde com o JWT
+//			return Collections.singletonMap("jwt-token", token);
+//		} catch (AuthenticationException authExc) {
+//			throw new RuntimeException("Credenciais Invalidas");
+//		}
+//	}
 
 }

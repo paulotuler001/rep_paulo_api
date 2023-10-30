@@ -10,15 +10,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.api.trabapi.dto.ApartamentoDTO;
+import br.com.api.trabapi.dto.ApartamentoRespostaDTO;
 import br.com.api.trabapi.entities.Apartamento;
 import br.com.api.trabapi.services.ApartamentoService;
+import br.com.api.trabapi.services.EmailService;
 
 @RestController
 @RequestMapping("/apartamento")
 public class ApartamentoController {
 
+	private EmailService emailService;
+	
+	@Autowired
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+	
 	@Autowired
 	ApartamentoService apartamentoService;
 
@@ -28,27 +39,27 @@ public class ApartamentoController {
 	}
 	
 	@PostMapping("/salvar")
-	public Apartamento salvar(@RequestBody Apartamento objetoTeste) {
-		return apartamentoService.salvar(objetoTeste);
+	public void salvar(@RequestBody ApartamentoDTO objetoTeste, @RequestParam String email) {
+		apartamentoService.salvar(objetoTeste, email);
 	}
 
 	@GetMapping("/{id}")
-	public Apartamento acharId(@PathVariable Integer id) {
+	public ApartamentoRespostaDTO acharId(@PathVariable Integer id) {
 		return apartamentoService.acharId(id);
 	}
 
 	@GetMapping("/listar")
-	public List<Apartamento> listar() {
+	public List<ApartamentoRespostaDTO> listar() {
 		return apartamentoService.listar();
 	}
 
-	@DeleteMapping("/deletarLogico/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public void deletarlogico(@PathVariable Integer id) {
-		apartamentoService.deletarlogico(id);
+		apartamentoService.deletar(id);
 	}
 
 	@PutMapping("/atualizar/{id}")
-	public Apartamento atualizar(@PathVariable Integer id, @RequestBody Apartamento objetoTeste) {
+	public Apartamento atualizar(@PathVariable Integer id, @RequestBody ApartamentoDTO objetoTeste) {
 		return apartamentoService.atualizar(id,objetoTeste);
 	}
 }

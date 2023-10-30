@@ -14,13 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -54,21 +51,23 @@ public class Usuario {
 	private String password;
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
+	private List<Aluguel> aluguels;
+	@OneToMany
+	@JoinColumn(name = "usuario_id")
+	private List<Apartamento> apartamentos;
+	@OneToMany
+	@JoinColumn(name = "usuario_id")
 	private List<Endereco> endereco;
 	@ManyToMany
 	@JoinTable(name = "usuario_role", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 	
-	@OneToMany
-	@JoinColumn(name="usuario_id")
-	 private List<Apartamento> apartamentos;
-
 	public Usuario() {
 		super();
 	}
 
 	public Usuario(Integer id, String nome, String nomeUsuario, String email, String cpf, LocalDate dataNascimento,
-			Boolean ativo, String password, List<Endereco> endereco,
+			Boolean ativo, String password,List<Aluguel> aluguels, List<Apartamento> apartamentos, List<Endereco> endereco,
 			Set<Role> roles) {
 		super();
 		this.id = id;
@@ -79,8 +78,26 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.ativo = ativo;
 		this.password = password;
+		this.aluguels=aluguels;
+		this.apartamentos = apartamentos;
 		this.endereco = endereco;
 		this.roles = roles;
+	}
+
+	public List<Aluguel> getAluguels() {
+		return aluguels;
+	}
+
+	public void setAluguels(List<Aluguel> aluguels) {
+		this.aluguels = aluguels;
+	}
+
+	public List<Apartamento> getApartamentos() {
+		return apartamentos;
+	}
+
+	public void setApartamentos(List<Apartamento> apartamentos) {
+		this.apartamentos = apartamentos;
 	}
 
 	public Integer getId() {
@@ -167,7 +184,9 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", nomeUsuario=" + nomeUsuario + ", email=" + email + ", cpf="
 				+ cpf + ", dataNascimento=" + dataNascimento + ", ativo=" + ativo + ", password=" + password
-				+ ", endereco=" + endereco + ", roles=" + roles
-				+ "]";
+				+ ", aluguels=" + aluguels + ", apartamentos=" + apartamentos + ", endereco=" + endereco + ", roles="
+				+ roles + "]";
 	}
+
+	
 }
