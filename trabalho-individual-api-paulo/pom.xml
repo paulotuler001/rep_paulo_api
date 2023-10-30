@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.api</groupId>
 	<artifactId>trab-api</artifactId>
-	<version>7.0.0</version>
+	<version>7.2.2</version>
 	<name>trabalho-individual-api-1</name>
 	<description>Trabalho Individual API</description>
 	<properties>
