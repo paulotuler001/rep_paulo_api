@@ -39,8 +39,8 @@ public class ApartamentoController {
 	}
 	
 	@PostMapping("/salvar")
-	public void salvar(@RequestBody ApartamentoDTO objetoTeste, @RequestParam String email) {
-		apartamentoService.salvar(objetoTeste, email);
+	public void salvar(@RequestBody ApartamentoDTO objetoTeste, @RequestParam String emailProprietario) {
+		apartamentoService.salvar(objetoTeste, emailProprietario);
 	}
 
 	@GetMapping("/{id}")

@@ -50,12 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usuario/{id}", "/usuario/deletarLogico/{id}",  "/endereco/{id}",
 						"/endereco/deletarLogico/{id}", "/endereco/listar", "/apartamento/atualizar/{id}",
 						"/apartamento/deletarLogico/{id}", "/apartamento/salvar", "/aluguel/listar")
-				.hasRole("PROPRIETARIO")
+				.permitAll()
 				.antMatchers("/usuario/count","/usuario/listar","/usuario/recuperarConta/{id}", "/usuario/recuperarSenha/{id}",
 						"/endereco/atualizar/{id}", "/endereco/count", "/endereco/reativacaoDeEndereco/{id}",
 						"/endereco/salvar", "/apartamento/{id}", "/apartamento/count", "/aluguel/deletarLogico/{id}",
 						"/aluguel/salvar")
-				.hasAnyRole("PROPRIETARIO", "FIADOR", "INQUILINO")
+				.permitAll()
 				.and().userDetailsService(uds).exceptionHandling()
 				.authenticationEntryPoint((request, response, authException) -> response
 						.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"))

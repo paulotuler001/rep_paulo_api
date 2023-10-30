@@ -24,28 +24,22 @@ public class Apartamento {
 	@Column(nullable = false, unique = true)
 	private Integer id;
 	@Column(length = 9)
-    @NotBlank
+//    @NotBlank
 	private String numero;
 	@Column(length = 12)
-    @NotBlank
+//    @NotBlank
 	private String cor;
 //	@Column(length = 12)
 //	@NotBlank
 	private Double juros;
 	@NotBlank
 	private String descricao;
-//	@Column(length = 12)
-//	@NotBlank
-	private Double valor;
-	@Column(length = 12)
-//	@NotBlank
-	private Boolean mobilidado;
 	@Column(length = 12)
 //	@NotBlank
 	private Boolean ativo;
 	private Double valorUnitario;
 	@Column(length = 9)
-    @NotBlank
+//    @NotBlank
 	private Integer qntdEstoque;
 	@ElementCollection
 	@CollectionTable(name = "aluguel_apartamento", joinColumns = @JoinColumn(name = "apartamento_id"))
@@ -77,8 +71,6 @@ public class Apartamento {
 		this.cor = cor;
 		this.juros = juros;
 		this.descricao = descricao;
-		this.valor = valor;
-		this.mobilidado = mobilidado;
 		this.ativo = ativo;
 		this.valorUnitario = valorUnitario;
 		this.qntdEstoque = qntdEstoque;
@@ -136,24 +128,6 @@ public class Apartamento {
 		this.juros = juros;
 	}
 
-	
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
-	public Boolean getMobilidado() {
-		return mobilidado;
-	}
-
-	public void setMobilidado(Boolean mobilidado) {
-		this.mobilidado = mobilidado;
-	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -162,41 +136,26 @@ public class Apartamento {
 		this.ativo = ativo;
 	}
 
-
-
-
 	public String getDescricao() {
 		return descricao;
 	}
-
-
-
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-
-
-
 	public Double getValorUnitario() {
 		return valorUnitario;
 	}
-
-
-
 
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
 
-
-
-
 	@Override
 	public String toString() {
 		return "Apartamento [id=" + id + ", numero=" + numero + ", cor=" + cor + ", juros=" + juros + ", descricao="
-				+ descricao + ", valor=" + valor + ", mobilidado=" + mobilidado + ", ativo=" + ativo
+				+ descricao  + ", ativo=" + ativo
 				+ ", valorUnitario=" + valorUnitario + ", qntdEstoque=" + qntdEstoque + ", itemQuantidade="
 				+ itemQuantidade + "]";
 	}

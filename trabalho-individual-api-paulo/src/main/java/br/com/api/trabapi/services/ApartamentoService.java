@@ -30,6 +30,8 @@ public class ApartamentoService {
 		apartamento.setDescricao(objeto.getDescricao());
 		apartamento.setQntdEstoque(objeto.getQntdEstoque());
 		apartamento.setValorUnitario(objeto.getValorUnitario());
+		apartamento.setCor(objeto.getCor());
+		apartamento.setNumero(objeto.getNumero());
 
 		return apartamento;
 	}
@@ -40,6 +42,8 @@ public class ApartamentoService {
 		apartamento.setDescricao(objeto.getDescricao());
 		apartamento.setQntdEstoque(objeto.getQntdEstoque());
 		apartamento.setValorUnitario(objeto.getValorUnitario());
+		apartamento.setCor(objeto.getCor());
+		apartamento.setNumero(objeto.getNumero());
 
 		return apartamento;
 	}
@@ -92,19 +96,28 @@ public class ApartamentoService {
 			throw new EntityNotFoundException("Esse apartamento não existe");
 		} else {
 			Optional<Apartamento> registroAntigo = apartamentoRepository.findById(id);
-			Apartamento apartamento = parseDeApartamento(objetoapartamento);
+//			Apartamento apartamento = parseDeApartamento(objetoapartamento);
 
-			if (apartamento.getAtivo() != null) {
-				registroAntigo.get().setAtivo(apartamento.getAtivo());
+//			if (apartamento.getAtivo() != null) {
+//				registroAntigo.get().setAtivo(apartamento.getAtivo());
+//			}
+			if (objetoapartamento.getNumero() != null) {
+				registroAntigo.get().setNumero(objetoapartamento.getNumero());
 			}
-			if (apartamento.getDescricao() != null) {
-				registroAntigo.get().setDescricao(apartamento.getDescricao());
+			if (objetoapartamento.getCor() != null) {
+				registroAntigo.get().setCor(objetoapartamento.getCor());
 			}
-			if (apartamento.getQntdEstoque() != null) {
-				registroAntigo.get().setQntdEstoque(apartamento.getQntdEstoque());
+			if (objetoapartamento.getJuros() != null) {
+				registroAntigo.get().setJuros(objetoapartamento.getJuros());
 			}
-			if (apartamento.getValorUnitario() != null) {
-				registroAntigo.get().setValorUnitario(apartamento.getValorUnitario());
+			if (objetoapartamento.getDescricao() != null) {
+				registroAntigo.get().setDescricao(objetoapartamento.getDescricao());
+			}
+			if (objetoapartamento.getQntdEstoque() != null) {
+				registroAntigo.get().setQntdEstoque(objetoapartamento.getQntdEstoque());
+			}
+			if (objetoapartamento.getValorUnitario() != null) {
+				registroAntigo.get().setValorUnitario(objetoapartamento.getValorUnitario());
 			}
 			registroAntigo.get().setId(id);
 			return apartamentoRepository.save(registroAntigo.get());
