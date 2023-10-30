@@ -1,6 +1,6 @@
 # <p align="center">Trabalho individual - API RestFul - Condom 505 AM</p>
 <p align="center">
-<img src="https://github.com/patriciastarck/trabalho-em-grupo-g4/blob/main/grupo4/img/logo.png">
+<img src="https://github.com/paulotuler001/rep_paulo_api/blob/main/trabalho-individual-api-paulo/img/logo.png">
 </p>
 
 
@@ -11,7 +11,7 @@
 
 # <p align="center">Sistema de Aluguel para Condomínio</p>
 
-<h3>Uma plataforma deseja conectar usuários que estão interessados em alugar e
+<h3>Uma plataforma deseja conectar usuários que estão interessados em alugar e usuários que queiram
 fornecer seus apartamentos. Para isso precisa de um sistema capaz de realizar o cadastro
 de usuários e o controle de apartamentos.</h3>
 <hr>
